@@ -3,107 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Shriram Automall India Limited - Internal Vehicle Management Portal">
-    <meta name="author" content="Shriram Automall India Limited">
-    <title>SAMIL Internal Portal | Shriram Automall India Limited</title>
+    <meta name="description" content="Shriram Automall India Limited - Vehicle Status Query">
+    <title>Vehicle Status Query - Shriram Automall</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        .hidden { display: none !important; }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body {
-            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* ============ LOGIN & SEARCH PAGE STYLES ============ */
+        .login-wrapper {
+            font-family: 'Roboto', Arial, sans-serif;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            background: linear-gradient(180deg, #f5f7fa 0%, #e4e8eb 100%);
         }
 
-        /* Header Styles */
-        .header {
+        .login-header {
             background: linear-gradient(135deg, #f57f17 0%, #f9a825 100%);
-            padding: 12px 30px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .logo-section {
+        .login-logo-section {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .logo-icon {
+        .login-logo-icon {
             width: 55px;
             height: 55px;
             background: white;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
             padding: 3px;
         }
 
-        .logo-icon img {
+        .login-logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        .logo-text {
-            color: white;
-        }
+        .login-logo-text { color: #333; }
+        .login-logo-text h1 { font-size: 22px; font-weight: 700; }
+        .login-logo-text p { font-size: 11px; opacity: 0.8; }
 
-        .logo-text h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+        .login-header-info { color: #333; text-align: right; font-size: 12px; }
+        .login-header-info span { display: block; margin: 2px 0; }
 
-        .logo-text p {
-            font-size: 11px;
-            opacity: 0.9;
-            letter-spacing: 0.5px;
-        }
-
-        .header-info {
-            color: white;
-            text-align: right;
-            font-size: 12px;
-        }
-
-        .header-info span {
-            display: block;
-            margin: 2px 0;
-        }
-
-        /* Main Content */
-        .main-content {
+        .login-content {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 30px;
-            background: linear-gradient(180deg, #f5f7fa 0%, #e4e8eb 100%);
         }
 
-        /* Card Styles */
-        .card {
+        .login-card {
             background: white;
             padding: 40px;
             border-radius: 16px;
@@ -111,29 +75,20 @@
             width: 100%;
             max-width: 450px;
             position: relative;
-            overflow: hidden;
         }
 
-        .card::before {
+        .login-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 5px;
             background: linear-gradient(90deg, #f9a825, #ffca28, #f9a825);
+            border-radius: 16px 16px 0 0;
         }
 
-        .wide-card {
-            max-width: 1000px;
-        }
+        .login-card-header { text-align: center; margin-bottom: 30px; }
 
-        .card-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .card-header .icon {
+        .login-card-header .icon {
             width: 70px;
             height: 70px;
             background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
@@ -147,291 +102,9 @@
             box-shadow: 0 8px 25px rgba(249, 168, 37, 0.4);
         }
 
-        .card-header h2 {
-            color: #333;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .login-card-header h2 { color: #333; font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .login-card-header p { color: #777; font-size: 14px; }
 
-        .card-header p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-wrapper i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #aaa;
-            font-size: 16px;
-        }
-
-        .input-wrapper input {
-            width: 100%;
-            padding: 14px 14px 14px 45px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            background: #fafafa;
-        }
-
-        .input-wrapper input:focus {
-            border-color: #f9a825;
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(249, 168, 37, 0.2);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
-            color: #333;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(249, 168, 37, 0.5);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #666 0%, #444 100%);
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-small {
-            width: auto;
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .error-msg {
-            color: #c62828;
-            font-size: 13px;
-            margin-top: 15px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Table Styles */
-        .table-container {
-            overflow-x: auto;
-            margin-top: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        th {
-            background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
-            color: #333;
-            padding: 15px;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 18px 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-
-        tr:hover {
-            background: #fafafa;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .status-cancelled {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .status-approved {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .status-pending {
-            background: #fff3e0;
-            color: #ef6c00;
-        }
-
-        /* Details Box */
-        .details-box {
-            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 5px solid #f9a825;
-            margin-top: 25px;
-            text-align: left;
-        }
-
-        .details-box h3 {
-            color: #f57f17;
-            font-size: 16px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-item label {
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .detail-item span {
-            font-size: 15px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        /* Vehicle Info Card */
-        .vehicle-info {
-            background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
-            color: #333;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .vehicle-info .vehicle-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-
-        .vehicle-info h3 {
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        .vehicle-info p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a2e;
-            color: #aaa;
-            padding: 15px 30px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .footer a {
-            color: #ffca28;
-            text-decoration: none;
-        }
-
-        .footer-links {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        /* Info Banner */
         .info-banner {
             background: #fffde7;
             border: 1px solid #ffca28;
@@ -445,7 +118,45 @@
             color: #f57f17;
         }
 
-        /* Security Badge */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #555; font-size: 14px; font-weight: 500; }
+
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; }
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #fafafa;
+        }
+        .input-wrapper input:focus {
+            border-color: #f9a825;
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(249, 168, 37, 0.2);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249, 168, 37, 0.5); }
+
+        .error-msg { color: #c62828; font-size: 13px; margin-top: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
         .security-badge {
             display: flex;
             align-items: center;
@@ -457,815 +168,505 @@
             color: #888;
             font-size: 12px;
         }
+        .security-badge i { color: #4caf50; }
 
-        .security-badge i {
-            color: #4caf50;
+        .login-footer {
+            background: #1a1a2e;
+            color: #aaa;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
         }
+        .login-footer a { color: #ffca28; text-decoration: none; margin: 0 10px; }
 
-        /* Responsive - Tablet */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-                padding: 15px 20px;
-            }
-            
-            .logo-section {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .logo-icon {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .header-info {
-                text-align: center;
-            }
-            
-            .logo-text h1 {
-                font-size: 20px;
-            }
-            
-            .logo-text p {
-                font-size: 10px;
-            }
-            
-            .main-content {
-                padding: 20px 15px;
-            }
-            
-            .card {
-                padding: 25px 20px;
-                margin: 10px;
-                border-radius: 12px;
-            }
-            
-            .wide-card {
-                max-width: 100%;
-            }
-            
-            .card-header .icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            .card-header h2 {
-                font-size: 20px;
-            }
-            
-            .vehicle-info {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px;
-            }
-            
-            .vehicle-info h3 {
-                font-size: 20px;
-            }
-            
-            .details-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .footer {
-                padding: 15px;
-            }
-            
-            .footer-links a {
-                margin: 0 8px;
-                font-size: 11px;
-            }
-        }
-
-        /* Responsive - Mobile */
-        @media (max-width: 480px) {
-            .header {
-                padding: 12px 15px;
-                gap: 8px;
-            }
-            
-            .logo-section {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .logo-icon {
-                width: 50px;
-                height: 50px;
-                padding: 2px;
-            }
-            
-            .logo-text h1 {
-                font-size: 16px;
-                letter-spacing: 0.5px;
-            }
-            
-            .logo-text p {
-                font-size: 9px;
-            }
-            
-            .header-info {
-                font-size: 10px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px 15px;
-            }
-            
-            .header-info span {
-                margin: 0;
-            }
-            
-            .main-content {
-                padding: 15px 10px;
-                align-items: flex-start;
-            }
-            
-            .card {
-                padding: 20px 15px;
-                margin: 0;
-                border-radius: 10px;
-                width: 100%;
-            }
-            
-            .card-header {
-                margin-bottom: 20px;
-            }
-            
-            .card-header .icon {
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
-            }
-            
-            .card-header h2 {
-                font-size: 18px;
-            }
-            
-            .card-header p {
-                font-size: 12px;
-            }
-            
-            .info-banner {
-                padding: 10px 12px;
-                font-size: 11px;
-                gap: 8px;
-                text-align: left;
-            }
-            
-            .info-banner i {
-                flex-shrink: 0;
-            }
-            
-            .form-group {
-                margin-bottom: 15px;
-            }
-            
-            .form-group label {
-                font-size: 13px;
-            }
-            
-            .input-wrapper input {
-                padding: 12px 12px 12px 40px;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-            
-            .input-wrapper i {
-                left: 12px;
-                font-size: 14px;
-            }
-            
-            .btn {
-                padding: 14px 12px;
-                font-size: 14px;
-            }
-            
-            .btn-small {
-                padding: 12px 15px;
-                font-size: 13px;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .security-badge {
-                font-size: 10px;
-                padding-top: 15px;
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .vehicle-info {
-                padding: 15px;
-                gap: 10px;
-                border-radius: 10px;
-            }
-            
-            .vehicle-info .vehicle-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-                border-radius: 8px;
-            }
-            
-            .vehicle-info h3 {
-                font-size: 18px;
-                letter-spacing: 1px;
-            }
-            
-            .vehicle-info p {
-                font-size: 11px;
-            }
-            
-            /* Mobile Table - Card Style */
-            .table-container {
-                margin-top: 15px;
-                border-radius: 8px;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .table-container::after {
-                content: '← Scroll to see more →';
-                display: block;
-                text-align: center;
-                font-size: 10px;
-                color: #888;
-                padding: 8px;
-                background: #f5f5f5;
-            }
-            
-            table {
-                min-width: 450px;
-            }
-            
-            th {
-                padding: 10px 8px;
-                font-size: 10px;
-                white-space: nowrap;
-            }
-            
-            th i {
-                display: none;
-            }
-            
-            td {
-                padding: 10px 8px;
-                font-size: 11px;
-            }
-            
-            .status-badge {
-                padding: 4px 8px;
-                font-size: 9px;
-            }
-            
-            td .btn-small {
-                padding: 6px 10px !important;
-                font-size: 10px !important;
-                width: auto !important;
-            }
-            
-            /* Details Box Mobile */
-            .details-box {
-                padding: 15px;
-                margin-top: 15px;
-                border-radius: 8px;
-            }
-            
-            .details-box h3 {
-                font-size: 14px;
-                margin-bottom: 15px;
-                flex-wrap: wrap;
-            }
-            
-            .details-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 15px 10px;
-            }
-            
-            .detail-item {
-                min-width: 0;
-            }
-            
-            .detail-item label {
-                font-size: 10px;
-            }
-            
-            .detail-item span {
-                font-size: 13px;
-                word-break: break-word;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 20px;
-            }
-            
-            .action-buttons .btn {
-                width: 100%;
-            }
-            
-            /* Footer Mobile */
-            .footer {
-                padding: 15px 10px;
-            }
-            
-            .footer-links {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 8px 10px;
-                margin-bottom: 12px;
-            }
-            
-            .footer-links a {
-                margin: 0;
-                font-size: 10px;
-                text-align: center;
-            }
-            
-            .footer p {
-                font-size: 9px;
-                line-height: 1.6;
-            }
-            
-            /* Toast Mobile */
-            .toast {
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-                font-size: 12px;
-                padding: 12px 15px;
-            }
-        }
-
-        /* Extra Small Devices */
-        @media (max-width: 360px) {
-            .header {
-                padding: 10px 12px;
-            }
-            
-            .logo-section {
-                gap: 6px;
-            }
-            
-            .logo-icon {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .logo-text h1 {
-                font-size: 14px;
-            }
-            
-            .logo-text p {
-                font-size: 8px;
-            }
-            
-            .header-info {
-                font-size: 9px;
-            }
-            
-            .main-content {
-                padding: 10px 8px;
-            }
-            
-            .card {
-                padding: 15px 12px;
-            }
-            
-            .card-header .icon {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .card-header h2 {
-                font-size: 16px;
-            }
-            
-            .card-header p {
-                font-size: 11px;
-            }
-            
-            .info-banner {
-                font-size: 10px;
-                padding: 8px 10px;
-            }
-            
-            .input-wrapper input {
-                padding: 11px 11px 11px 36px;
-                font-size: 16px;
-            }
-            
-            .btn {
-                padding: 12px 10px;
-                font-size: 13px;
-            }
-            
-            .vehicle-info h3 {
-                font-size: 16px;
-            }
-            
-            .details-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .detail-item span {
-                font-size: 12px;
-            }
-            
-            table {
-                min-width: 400px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 9px;
-            }
-        }
-
-        /* Touch-friendly improvements */
-        @media (hover: none) and (pointer: coarse) {
-            .btn {
-                min-height: 48px;
-            }
-            
-            .input-wrapper input {
-                min-height: 48px;
-            }
-            
-            .btn-small {
-                min-height: 44px;
-            }
-        }
-
-        /* Loading Animation */
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #333;
+        .action-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
+        .btn-secondary {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #666 0%, #444 100%);
             color: white;
-            padding: 15px 25px;
+            border: none;
             border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        /* Login page mobile */
+        @media (max-width: 768px) {
+            .login-header { flex-direction: column; gap: 10px; text-align: center; padding: 15px; }
+            .login-logo-section { flex-direction: column; gap: 8px; }
+            .login-header-info { text-align: center; }
+            .login-content { padding: 20px 15px; }
+            .login-card { padding: 25px 20px; }
+        }
+        @media (max-width: 480px) {
+            .login-logo-icon { width: 50px; height: 50px; }
+            .login-logo-text h1 { font-size: 18px; }
+            .login-card-header .icon { width: 55px; height: 55px; font-size: 22px; }
+            .login-card-header h2 { font-size: 20px; }
+            .info-banner { font-size: 11px; padding: 10px; }
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .btn-login, .btn-secondary { min-height: 48px; }
+            .input-wrapper input { min-height: 48px; }
+        }
+
+        /* ============ PORTAL PAGE STYLES (Exactly like second.html) ============ */
+        .portal-page {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background: #f4f4f4;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            background: #f1c40f;
+            padding: 6px 10px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .top-right a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .breadcrumb-bar {
+            padding: 8px 10px;
+            font-size: 13px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+            background: #f1c40f;
+            padding: 8px 10px;
+            font-weight: bold;
+        }
+
+        .portal-form-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        .portal-form-table td {
+            padding: 6px;
+            border: 1px solid #ccc;
+        }
+        .portal-form-table input {
+            width: 95%;
+            padding: 4px;
+            border: 1px solid #aaa;
+            font-size: 13px;
+        }
+
+        .portal-tabs {
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+        .portal-tabs button {
+            padding: 6px 12px;
+            border: 1px solid #aaa;
+            background: #eaeaea;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .portal-tabs button.active {
+            background: #fff;
+            font-weight: bold;
+        }
+
+        .portal-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        .portal-data-table th,
+        .portal-data-table td {
+            border: 1px solid #999;
+            padding: 6px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .portal-data-table th {
+            background: #ddd;
+            font-weight: bold;
+        }
+
+        .portal-container {
+            padding: 0 10px 10px 10px;
+        }
+
+        .back-btn {
+            margin: 10px;
+            padding: 8px 15px;
+            background: #f1c40f;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Portal mobile responsive */
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; text-align: center; gap: 8px; }
+            .top-right { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+            .top-right a { margin: 0 5px; }
+            .portal-form-table td { display: block; width: 100%; }
+            .portal-form-table input { width: 100%; }
+            .portal-tabs { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+            .portal-tabs button { font-size: 11px; padding: 5px 8px; }
+        }
+        @media (max-width: 480px) {
+            .portal-form-table input { font-size: 16px; padding: 8px; }
+            .portal-data-table th, .portal-data-table td { padding: 4px 2px; font-size: 10px; }
+            .section-title { font-size: 13px; }
+            .breadcrumb-bar { font-size: 11px; }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f1c40f;
+            color: #333;
+            padding: 12px 20px;
+            border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 1000;
         }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);
-            color: #333;
+        .toast.show { transform: translateY(0); opacity: 1; }
+        @media (max-width: 480px) {
+            .toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Header -->
-<header class="header">
-    <div class="logo-section">
-        <div class="logo-icon"><img src="logo.jpeg" alt="Shriram Automall Logo"></div>
-        <div class="logo-text">
-            <h1>SHRIRAM AUTOMALL</h1>
-            <p>India's Largest Vehicle Auction Platform</p>
-        </div>
-    </div>
-    <div class="header-info">
-        <span><i class="fas fa-headset"></i> Support: 1800-123-4567</span>
-        <span><i class="fas fa-envelope"></i> support@samil.in</span>
-    </div>
-</header>
-
-<!-- Main Content -->
-<main class="main-content">
-    
-    <!-- Login Page -->
-    <div id="loginPage" class="card">
-        <div class="card-header">
-            <div class="icon"><i class="fas fa-user-shield"></i></div>
-            <h2>Employee Login</h2>
-            <p>Access Internal Vehicle Management Portal</p>
-        </div>
-
-        <div class="info-banner">
-            <i class="fas fa-info-circle"></i>
-            <span>This portal is exclusively for authorized SAMIL employees only.</span>
-        </div>
-
-        <form onsubmit="login(event)">
-            <div class="form-group">
-                <label>Employee ID</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-id-badge"></i>
-                    <input type="text" id="username" placeholder="Enter your Employee ID" required>
-                </div>
+<!-- ============ LOGIN & SEARCH WRAPPER ============ -->
+<div id="loginWrapper" class="login-wrapper">
+    <header class="login-header">
+        <div class="login-logo-section">
+            <div class="login-logo-icon"><img src="logo.jpeg" alt="Logo"></div>
+            <div class="login-logo-text">
+                <h1>SHRIRAM AUTOMALL</h1>
+                <p>India's Largest Vehicle Auction Platform</p>
             </div>
+        </div>
+        <div class="login-header-info">
+            <span><i class="fas fa-headset"></i> Support: 1800-123-4567</span>
+            <span><i class="fas fa-envelope"></i> support@samil.in</span>
+        </div>
+    </header>
 
-            <div class="form-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                </div>
+    <main class="login-content">
+        <!-- Login Page -->
+        <div id="loginPage" class="login-card">
+            <div class="login-card-header">
+                <div class="icon"><i class="fas fa-user-shield"></i></div>
+                <h2>Employee Login</h2>
+                <p>Access Vehicle Status Query Portal</p>
             </div>
-
-            <button type="submit" class="btn">
-                <span>LOGIN TO PORTAL</span>
-                <i class="fas fa-arrow-right"></i>
-            </button>
-        </form>
-
-        <p id="loginError" class="error-msg hidden">
-            <i class="fas fa-exclamation-circle"></i>
-            <span></span>
-        </p>
-
-        <div class="security-badge">
-            <i class="fas fa-shield-alt"></i>
-            <span>Secured with 256-bit SSL Encryption</span>
-        </div>
-    </div>
-
-    <!-- Search Page -->
-    <div id="searchPage" class="card hidden">
-        <div class="card-header">
-            <div class="icon"><i class="fas fa-search"></i></div>
-            <h2>Vehicle History Search</h2>
-            <p>Search auction history by vehicle registration number</p>
-        </div>
-
-        <div class="info-banner">
-            <i class="fas fa-lightbulb"></i>
-            <span>Enter complete vehicle number without spaces for accurate results.</span>
-        </div>
-
-        <form onsubmit="searchVehicle(event)">
-            <div class="form-group">
-                <label>Vehicle Registration Number</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-car"></i>
-                    <input type="text" id="vehicleNum" placeholder="Ex: RJ27UA1088" required>
-                </div>
+            <div class="info-banner">
+                <i class="fas fa-info-circle"></i>
+                <span>This portal is exclusively for authorized SAMIL employees only.</span>
             </div>
-
-            <button type="submit" class="btn">
-                <span>SEARCH VEHICLE</span>
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-
-        <p id="searchError" class="error-msg hidden">
-            <i class="fas fa-exclamation-circle"></i>
-            <span></span>
-        </p>
-
-        <div class="action-buttons">
-            <button class="btn btn-secondary btn-small" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </div>
-    </div>
-
-    <!-- History Page -->
-    <div id="historyPage" class="card wide-card hidden">
-        <div class="vehicle-info">
-            <div class="vehicle-icon"><i class="fas fa-car-side"></i></div>
-            <div>
-                <h3 id="vehicleNumDisplay">RJ27UAXXXX</h3>
-                <p>Vehicle Auction History Report</p>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label>Employee ID</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="username" placeholder="Enter your Employee ID" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span>LOGIN TO PORTAL</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <p id="loginError" class="error-msg hidden"><i class="fas fa-exclamation-circle"></i><span></span></p>
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secured with 256-bit SSL Encryption</span>
             </div>
         </div>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th><i class="fas fa-calendar-alt"></i> Auction Date</th>
-                        <th><i class="fas fa-map-marker-alt"></i> Location</th>
-                        <th><i class="fas fa-gavel"></i> Bid Amount</th>
-                        <th><i class="fas fa-flag"></i> Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>23-Nov-2025</td>
-                        <td>Udaipur Hub</td>
-                        <td>₹3,40,000</td>
-                        <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                    </tr>
-                    <tr>
-                        <td>28-Nov-2025</td>
-                        <td>Udaipur Hub</td>
-                        <td>₹3,52,000</td>
-                        <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                    </tr>
-                    <tr>
-                        <td>15-Dec-2025</td>
-                        <td>Udaipur Hub</td>
-                        <td>₹3,48,000</td>
-                        <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                    </tr>
-                    <tr>
-                        <td>31-Dec-2025</td>
-                        <td>Udaipur Hub</td>
-                        <td>₹3,85,000</td>
-                        <td>
-                            <span class="status-badge status-approved">Approved</span>
-                            <br><br>
-                            <button class="btn btn-small" onclick="showDetails()" style="font-size:12px; padding:8px 15px;">
-                                <i class="fas fa-eye"></i> View Buyer Details
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Customer Details -->
-        <div id="customerDetails" class="details-box hidden">
-            <h3><i class="fas fa-user-check"></i> Approved Buyer Information</h3>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <label>Buyer Name</label>
-                    <span>Rakesh Kumar Sharma</span>
+        <!-- Search Page -->
+        <div id="searchPage" class="login-card hidden">
+            <div class="login-card-header">
+                <div class="icon"><i class="fas fa-search"></i></div>
+                <h2>Vehicle Search</h2>
+                <p>Search vehicle status by registration number</p>
+            </div>
+            <div class="info-banner">
+                <i class="fas fa-lightbulb"></i>
+                <span>Enter complete vehicle number without spaces.</span>
+            </div>
+            <form onsubmit="searchVehicle(event)">
+                <div class="form-group">
+                    <label>Vehicle Registration Number</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-car"></i>
+                        <input type="text" id="vehicleNum" placeholder="Ex: RJ27TA6510" required>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <label>Contact Number</label>
-                    <span>+91 78775 18647</span>
-                </div>
-                <div class="detail-item">
-                    <label>Email Address</label>
-                    <span>rakesh.sharma@email.com</span>
-                </div>
-                <div class="detail-item">
-                    <label>City</label>
-                    <span>Jaipur, Rajasthan</span>
-                </div>
-                <div class="detail-item">
-                    <label>Purchase Amount</label>
-                    <span>₹3,65,000</span>
-                </div>
-                <div class="detail-item">
-                    <label>Transaction ID</label>
-                    <span>TXN2024040215847</span>
-                </div>
-                <div class="detail-item">
-                    <label>Payment Status</label>
-                    <span style="color:#2e7d32">✓ Completed</span>
-                </div>
-                <div class="detail-item">
-                    <label>RC Transfer</label>
-                    <span style="color:#ef6c00">● In Progress</span>
-                </div>
+                <button type="submit" class="btn-login">
+                    <span>SEARCH VEHICLE</span>
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <p id="searchError" class="error-msg hidden"><i class="fas fa-exclamation-circle"></i><span></span></p>
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
+    </main>
 
-        <div class="action-buttons">
-            <button class="btn btn-small" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i> New Search
-            </button>
-            <button class="btn btn-secondary btn-small" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </div>
-    </div>
-
-</main>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-links">
+    <footer class="login-footer">
         <a href="#"><i class="fas fa-globe"></i> www.samil.in</a>
-        <a href="#"><i class="fas fa-phone"></i> Contact Us</a>
-        <a href="#"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a>
-    </div>
-    <p>© 2024 Shriram Automall India Limited. All Rights Reserved. | CIN: U74999TN2011PLC079470</p>
-</footer>
-
-<!-- Toast Notification -->
-<div id="toast" class="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMsg">Success!</span>
+        <a href="#"><i class="fas fa-phone"></i> Contact</a>
+        <p style="margin-top:8px;">© 2026 Shriram Automall India Limited. All Rights Reserved.</p>
+    </footer>
 </div>
 
+<!-- ============ PORTAL PAGE (Exactly like second.html) ============ -->
+<div id="portalPage" class="portal-page hidden">
+    
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div>User: <span id="loggedUser">a04554</span> &nbsp;|&nbsp; <span id="currentDateTime">02/02/2026 4:00 PM</span> &nbsp;|&nbsp; SERVER2</div>
+        <div class="top-right">
+            <a href="#">My Menu</a>
+            <a href="#">Calendar</a>
+            <a href="#" onclick="logout()">Logout</a>
+            <a href="#" onclick="goBack()">Back</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar">
+        Home &gt; Reports &gt; Others &gt; Vehicle Status Query
+    </div>
+
+    <!-- Title -->
+    <div class="section-title">VEHICLE STATUS QUERY</div>
+
+    <div class="portal-container">
+        <!-- Form Section -->
+        <table class="portal-form-table">
+            <tr>
+                <td>Company</td>
+                <td><input value="SAIL" readonly></td>
+                <td>RegNo</td>
+                <td><input id="displayRegNo" value="RJ27TA6510" readonly></td>
+                <td><button class="back-btn" onclick="goBack()" style="margin:0;">New Search</button></td>
+            </tr>
+            <tr>
+                <td>CustomerId</td>
+                <td><input value="AG00000038860" readonly></td>
+                <td>Name</td>
+                <td><input value="KISHAN LAL GURJAR" readonly></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <table class="portal-form-table">
+            <tr>
+                <td>Industry</td>
+                <td><input value="Passenger" readonly></td>
+                <td>Category</td>
+                <td><input value="4W" readonly></td>
+                <td>Vehtype</td>
+                <td><input value="MUV" readonly></td>
+            </tr>
+            <tr>
+                <td>Make</td>
+                <td><input value="MAHINDRA" readonly></td>
+                <td>Model</td>
+                <td><input value="BOLERO" readonly></td>
+                <td>Status</td>
+                <td><input value="Outwarded" readonly></td>
+            </tr>
+        </table>
+
+        <!-- Tabs -->
+        <div class="portal-tabs">
+            <button>Service</button>
+            <button class="active">Auction</button>
+            <button>Other Receipt</button>
+            <button>Invoice</button>
+            <button>Lien Details</button>
+        </div>
+
+        <!-- Data Table -->
+        <table class="portal-data-table">
+            <tr>
+                <th>S.No</th>
+                <th>RegNo</th>
+                <th>Auctioncode</th>
+                <th>Aucdate</th>
+                <th>LotNo</th>
+                <th>SoldAmt</th>
+                <th>SoldDate</th>
+                <th>BidId</th>
+                <th>BuyerId</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td id="tblReg1">RJ27TA6510</td>
+                <td>UDP20251126386</td>
+                <td>26/11/2025</td>
+                <td>49</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td id="tblReg2">RJ27TA6510</td>
+                <td>UDP20251203412</td>
+                <td>03/12/2025</td>
+                <td>32</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td id="tblReg3">RJ27TA6510</td>
+                <td>UDP20251215521</td>
+                <td>15/12/2025</td>
+                <td>18</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="tblReg4">RJ27TA6510</td>
+                <td>UDP20260122294</td>
+                <td>22/01/2026</td>
+                <td>137 A</td>
+                <td>360000</td>
+                <td>23/01/2026</td>
+                <td>141</td>
+                <td>AS00000276803</td>
+            </tr>
+        </table>
+
+        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Search</button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Success!</span></div>
+
 <script>
-    // Login Function - Accepts any credentials
+    // Update date/time
+    function updateDateTime() {
+        const now = new Date();
+        const d = String(now.getDate()).padStart(2,'0');
+        const m = String(now.getMonth()+1).padStart(2,'0');
+        const y = now.getFullYear();
+        let h = now.getHours();
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12; h = h ? h : 12;
+        const min = String(now.getMinutes()).padStart(2,'0');
+        document.getElementById('currentDateTime').textContent = `${d}/${m}/${y} ${h}:${min} ${ampm}`;
+    }
+    updateDateTime();
+
+    // Login
     function login(e) {
         e.preventDefault();
         const user = document.getElementById('username').value.trim();
         const pass = document.getElementById('password').value.trim();
-
         if(user === '' || pass === '') {
             showError('loginError', 'Please enter both Employee ID and Password');
             return;
         }
-
-        // Accept any username/password combination
-        showToast('Login successful! Welcome to SAMIL Portal');
+        document.getElementById('loggedUser').textContent = user;
+        showToast('Login successful!');
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('searchPage').classList.remove('hidden');
     }
 
-    // Search Vehicle Function
+    // Search Vehicle
     function searchVehicle(e) {
         e.preventDefault();
         const vNum = document.getElementById('vehicleNum').value.toUpperCase().replace(/\s/g, '');
-        
         if(vNum === '') {
             showError('searchError', 'Please enter a vehicle registration number');
             return;
         }
-
-        if(vNum === 'RJ27UA1088') {
-            document.getElementById('vehicleNumDisplay').textContent = vNum;
-            document.getElementById('searchPage').classList.add('hidden');
-            document.getElementById('historyPage').classList.remove('hidden');
-            showToast('Vehicle record found successfully!');
-        } else {
-            showError('searchError', 'Vehicle not found in database. Please verify the registration number.');
-        }
+        // Update all RegNo fields
+        document.getElementById('displayRegNo').value = vNum;
+        document.getElementById('tblReg1').textContent = vNum;
+        document.getElementById('tblReg2').textContent = vNum;
+        document.getElementById('tblReg3').textContent = vNum;
+        document.getElementById('tblReg4').textContent = vNum;
+        
+        // Show portal page, hide login wrapper
+        document.getElementById('loginWrapper').classList.add('hidden');
+        document.getElementById('portalPage').classList.remove('hidden');
+        showToast('Vehicle record found!');
     }
 
-    // Show/Hide Customer Details
-    function showDetails() {
-        const details = document.getElementById('customerDetails');
-        details.classList.toggle('hidden');
-    }
-
-    // Go Back to Search
+    // Go Back
     function goBack() {
-        document.getElementById('historyPage').classList.add('hidden');
-        document.getElementById('customerDetails').classList.add('hidden');
-        document.getElementById('searchPage').classList.remove('hidden');
+        document.getElementById('portalPage').classList.add('hidden');
+        document.getElementById('loginWrapper').classList.remove('hidden');
         document.getElementById('vehicleNum').value = '';
     }
 
-    // Logout Function
+    // Logout
     function logout() {
-        showToast('Logged out successfully!');
-        setTimeout(() => {
-            location.reload();
-        }, 1000);
+        showToast('Logged out!');
+        setTimeout(() => location.reload(), 800);
     }
 
-    // Show Error Message
-    function showError(elementId, message) {
-        const errorEl = document.getElementById(elementId);
-        errorEl.querySelector('span').textContent = message;
-        errorEl.classList.remove('hidden');
-        setTimeout(() => {
-            errorEl.classList.add('hidden');
-        }, 4000);
+    // Show Error
+    function showError(id, msg) {
+        const el = document.getElementById(id);
+        el.querySelector('span').textContent = msg;
+        el.classList.remove('hidden');
+        setTimeout(() => el.classList.add('hidden'), 4000);
     }
 
-    // Show Toast Notification
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        document.getElementById('toastMsg').textContent = message;
-        toast.classList.add('show', 'success');
-        setTimeout(() => {
-            toast.classList.remove('show', 'success');
-        }, 3000);
+    // Show Toast
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    // Clear errors on input focus
-    document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('focus', () => {
-            document.querySelectorAll('.error-msg').forEach(err => {
-                err.classList.add('hidden');
-            });
+    // Clear errors on focus
+    document.querySelectorAll('input').forEach(i => {
+        i.addEventListener('focus', () => {
+            document.querySelectorAll('.error-msg').forEach(e => e.classList.add('hidden'));
         });
     });
 </script>
